@@ -3,8 +3,6 @@
           
 $user = Auth::user()->username;
 $role = Auth::user()->getRoleNames()->first();
-// dd($role);
-// $dinilai = DB::table('pegawai')->where('atasan_nip', '=', $user)->get();
 @endphp
 
 

@@ -23,6 +23,14 @@ function Alternatif($id) {
     return $alternatif->nama_alternatif;
 }
 
+function HargaAlternatif($id) {
+    // return $nip;
+    $alternatif = Alternatif::where('id', $id)->first();
+    return $alternatif->harga;
+}
+
+
+
 function Deskripsi($id) {
     // return $nip;
     $alternatif = Alternatif::where('id', $id)->first();

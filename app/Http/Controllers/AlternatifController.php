@@ -6,7 +6,10 @@ use Illuminate\Http\Request;
 use App\Kriteria;
 use App\SubKriteria;
 use App\Alternatif;
+use App\NilaiAlternatif;
+use App\User;
 use DB;
+use Auth;
 
 class AlternatifController extends Controller
 {
@@ -19,7 +22,18 @@ class AlternatifController extends Controller
     {
         //
         // $kriterias = Kriteria::all();
-        $alternatifs = Alternatif::all();
+        $user = Auth::user()->getRoleNames()->first();
+        $user_id = Auth::user()->id;
+        // return $user;
+        if ($user == 'admin') {
+            $alternatifs = Alternatif::all();
+        }
+        
+        if ($user == 'pengguna') {
+            $alternatifs = Alternatif::where('user_id', 10)
+                            ->orWhere('user_id', $user_id)
+                            ->get();
+        }
         return view ('alternatif.index', compact('alternatifs'));
     }
 
@@ -31,7 +45,6 @@ class AlternatifController extends Controller
     public function create()
     {
         //
-
         $kriterias = Kriteria::all();
         return view ('alternatif.create', compact('kriterias'));
 
@@ -46,11 +59,13 @@ class AlternatifController extends Controller
     public function store(Request $request)
     {
 
+        $user = Auth::user()->id;
+        // return $user;
+
         $alternatif = new Alternatif;
         $alternatif->nama_alternatif = $request->nama_alternatif;
         $alternatif->harga = $request->harga;
-        $alternatif->deskripsi = $request->deskripsi;
-        // $alternatif->bobot_subkriteria = $request->bobot_subkriteria;
+        $alternatif->user_id = $user;
         $alternatif->save();
 
         return redirect()->route('alternatif.index');
@@ -102,7 +117,6 @@ class AlternatifController extends Controller
                         // 'kriteria_id' => $request->kriteria_id,
                         'nama_alternatif' => $request->nama_alternatif,
                         'harga' => $request->harga,
-                        'deskripsi' => $request->deskripsi,
                     ]);
                     
         return redirect()->route('alternatif.index');
@@ -122,6 +136,9 @@ class AlternatifController extends Controller
 
         $alternatif = Alternatif::where('id', $id);
         $alternatif->delete();
+
+        $nilai = NilaiAlternatif::where('alternatif_id', $id);
+        $nilai->delete();
 
         return redirect()->route('alternatif.index');
 

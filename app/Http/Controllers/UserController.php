@@ -41,10 +41,28 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+    public function register(request $request)
+    {
+
+        $user = User::create([
+            'name' => $request->nama,
+            'username' => $request->username,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+
+        ]);
+        
+        $user->assignRole(2);
+        return redirect()->route('home')->with('msg', 'Berhasil Membuat Akun');
+
+    }
+
     public function store(Request $request)
     {
         //
-        // return $request;
+        return $request;
+        
         // $nama = Pegawai($request->username);
         $user = User::create([
             'name' => $request->username,

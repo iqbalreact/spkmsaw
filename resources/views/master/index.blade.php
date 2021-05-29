@@ -66,7 +66,7 @@
         </div>
         <div class="info">
           <a href="#" class="d-block">{{ Auth::user()->name }}</a>
-          <small style="color: white">{{Auth::user()->username}}</small>
+          <small style="color: white">{{Auth::user()->getRoleNames()[0]}}</small>
         </div>
       </div>
 

@@ -44,10 +44,11 @@
               <thead>
               <tr>
                 <th>No</th>
-                <th style="width: 20%">Nama Alternatif</th>
-                <th style="width: 10%">Harga</th>
-                <th>Deskripsi</th>
-                <th>Aksi</th>
+                <th >Nama Alternatif</th>
+                <th >Harga</th>
+                @if (Auth::user()->getRoleNames()[0] == 'admin')
+                <th style="text-align: center">Aksi</th>
+                @endif
               </tr>
               </thead>
               <tbody>
@@ -58,8 +59,7 @@
                   <td>{{$alternatif->nama_alternatif}}</td>
                   
                   <td>Rp.{{format_uang($alternatif->harga)}}</td>
-                  <td>{{$alternatif->deskripsi}}</td>
-                  {{-- <td>{{$alternatif->gambar}}</td> --}}
+                  @if (Auth::user()->getRoleNames()[0] == 'admin')
                   <td align="center">
                     <div class="btn-group" role="group" aria-label="Basic example">
                       <a href="{{route('alternatif.edit', $alternatif->id)}}">
@@ -71,8 +71,8 @@
                           <button type="submit" class="btn btn-danger btn-xs">Hapus</button>
                       </form>
                     </div>
-
-                  </td>
+                  </td>  
+                  @endif
                 </tr>
                 @endforeach
               </tbody>

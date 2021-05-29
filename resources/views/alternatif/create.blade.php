@@ -42,13 +42,13 @@
 
                     <div class="form-group">
                         <label for="exampleInputEmail1">Harga</label>
-                        <input type="text" class="form-control" name="harga"  placeholder="Masukkan Harga">
+                        <input type="text" class="form-control" name="harga"  placeholder="Masukkan Harga (contoh : 3000000)">
                     </div>
 
-                    <div class="form-group">
+                    {{-- <div class="form-group">
                         <label for="exampleInputEmail1">Deskripsi</label>
                         <textarea name="deskripsi" class="form-control" id="" cols="30" rows="10"></textarea>
-                    </div> 
+                    </div>  --}}
                 </div>
         
                 <div class="card-footer">

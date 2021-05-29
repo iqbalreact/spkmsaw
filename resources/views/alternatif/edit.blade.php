@@ -46,15 +46,13 @@
                         <input type="text" class="form-control" value="{{$alternatif->harga}}" name="harga"  placeholder="Masukkan Nama Alternatif">
                     </div>
 
-                    <div class="form-group">
+                    {{-- <div class="form-group">
                         <label for="exampleInputEmail1">Deskripsi</label>
 
                         <textarea name="deskripsi" class="form-control" id="" cols="30" rows="10">
                             {{$alternatif->deskripsi}}
                         </textarea>
-
-                        {{-- <input type="text" class="form-control" value="{{$alternatif->deskripsi}}" name="deskripsi"  placeholder="Masukkan Deskripsi"> --}}
-                    </div>
+                    </div> --}}
                 </div>
                        
                 <div class="card-footer">

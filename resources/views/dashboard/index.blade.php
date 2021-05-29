@@ -23,16 +23,16 @@
 @endsection
 
 @section('content')
-{{-- <div class="row">
+<div class="row">
   <div class="col-12 col-sm-6 col-md-3">
     <div class="info-box">
-      <span class="info-box-icon bg-info elevation-1"><i class="fas fa-cog"></i></span>
+      <span class="info-box-icon bg-info elevation-1"><i class="fas fa-mobile"></i></span>
 
       <div class="info-box-content">
-        <span class="info-box-text">CPU Traffic</span>
+        <span class="info-box-text">Total Smartphone</span>
         <span class="info-box-number">
-          10
-          <small>%</small>
+          {{count($alternatifs)}}
+          {{-- <small>%</small> --}}
         </span>
       </div>
       <!-- /.info-box-content -->
@@ -42,11 +42,11 @@
   <!-- /.col -->
   <div class="col-12 col-sm-6 col-md-3">
     <div class="info-box mb-3">
-      <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-thumbs-up"></i></span>
+      <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-shopping-basket"></i></span>
 
       <div class="info-box-content">
-        <span class="info-box-text">Likes</span>
-        <span class="info-box-number">41,410</span>
+        <span class="info-box-text">Total Kriteria</span>
+        <span class="info-box-number">{{count($kriteria)}}</span>
       </div>
       <!-- /.info-box-content -->
     </div>
@@ -59,11 +59,11 @@
 
   <div class="col-12 col-sm-6 col-md-3">
     <div class="info-box mb-3">
-      <span class="info-box-icon bg-success elevation-1"><i class="fas fa-shopping-cart"></i></span>
+      <span class="info-box-icon bg-success elevation-1"><i class="fas fa-share-alt-square"></i></span>
 
       <div class="info-box-content">
-        <span class="info-box-text">Sasaran Kinerja Pegawai</span>
-        <span class="info-box-number">{{count($skp)}}</span>
+        <span class="info-box-text">Total Subkriteria</span>
+        <span class="info-box-number">{{count($sub)}}</span>
       </div>
       <!-- /.info-box-content -->
     </div>
@@ -75,15 +75,15 @@
       <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-users"></i></span>
 
       <div class="info-box-content">
-        <span class="info-box-text">Total Pegawai</span>
-        <span class="info-box-number">{{count($pegawai)}}</span>
+        <span class="info-box-text">Total Pengguna</span>
+        <span class="info-box-number">{{count($pengguna)}}</span>
       </div>
       <!-- /.info-box-content -->
     </div>
     <!-- /.info-box -->
   </div>
   <!-- /.col -->
-</div> --}}
+</div>
 
 <div class="row">
 
@@ -104,6 +104,22 @@
             <p>
                 Selamat Datang di Aplikasi Sistem Rekomendasi Pemilihan Smartphone Menggunakan Metode SAW dan WP
             </p>
+
+            <P>Cara Penggunaan Aplikasi</P>
+            <article>
+              <ol type="1">
+                <li>Masukan smartphone pilihan anda melalui menu <b><a href="/admin/alternatif">Data Alternatif</a> </b></li>
+                <li>Pilih Tambah Alternatif</li>
+                <li>Pilih lengkapi form Alternatif</li>
+                <li>Kemudian Simpan</li>
+                <li>Lengkapi data smartphone yang telah anda tambahkan melalui menu <b><a href="/admin/nilai-alternatif">Nilai Alternatif</a> </b></li>
+                <li>Pilih Tambah Nilai Alternatif</li>
+                <li>Lengkapi form nilai dari smartphone yang dipilih</li>
+                <li>Kemudian Simpan</li>
+                <li>Klik Proses Rekomendasi</li>
+                <li>Sistem Akan Menampilkan Hasil Rekomendasi</li>
+              </ol>
+            </article>
 
           </div>
           <!-- /.card-body -->

@@ -42,7 +42,7 @@
                 <th>Ranking</th>
                 {{-- <th>Ranking</th> --}}
                 <th style="width: 15%">Merk Smartphone</th>
-                <th style="width: 30%">Deskripsi</th>
+                {{-- <th style="width: 30%">Deskripsi</th> --}}
                 <th>Spesifikasi</th>
                 @php
                     $role = Auth::user()->getRoleNames()->first();
@@ -62,12 +62,9 @@
                         <td style="text-align: center; vertical-align : middle">
                           {{Alternatif($item['alternatif'])}}
                           <hr>
-                          <b>Harga : Rp. {{Harga($item['alternatif'])}}</b>
+                          <b>Harga : {{format_uang(Harga($item['alternatif']))}}</b>
                           <hr>
                         </td>
-                        <td>
-                            {{Deskripsi($item['alternatif'])}} 
-                            {{-- <br> --}}
                         <td>
                             @php
                                 $nilai = Nilai($item['alternatif']);

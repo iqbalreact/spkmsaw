@@ -7,7 +7,9 @@ use App\Kriteria;
 use App\SubKriteria;
 use App\Alternatif;
 use App\NilaiAlternatif;
+use App\User;
 use DB;
+use Auth;
 
 class NilaiAlternatifController extends Controller
 {
@@ -20,8 +22,10 @@ class NilaiAlternatifController extends Controller
     {
         //
         // $kriterias = NilaiNilaiAlternatif::all();
+        $user = Auth::user()->id;
+        // return $user;
         $kriterias = Kriteria::all();
-        $nilai = NilaiAlternatif::all()->groupBy('alternatif_id');
+        $nilai = NilaiAlternatif::where('user_id', $user)->get()->groupBy('alternatif_id');
         // return $nilai;
         return view ('nilai-alternatif.index', compact('nilai', 'kriterias'));
     }
@@ -34,9 +38,9 @@ class NilaiAlternatifController extends Controller
     public function create()
     {
         //
-
         $alternatifs = Alternatif::all();
         $kriterias = Kriteria::all();
+
         return view ('nilai-alternatif.create', compact('kriterias', 'alternatifs'));
 
     }
@@ -50,14 +54,19 @@ class NilaiAlternatifController extends Controller
     public function store(Request $request)
     {
         $sub = $request->subkriteria_id;
+        $user = Auth::user()->id;
+
+        // $sub = $request->subkriteria_id;
 
         foreach ($sub as $key => $value) {
             $nilai = new NilaiAlternatif;
             $nilai->alternatif_id = $request->alternatif_id;
             $nilai->subkriteria_id = $value;
+            $nilai->user_id = $user;
             $nilai->save();
         }
 
+    
         return redirect()->route('nilai-alternatif.index');
 
     }
@@ -83,10 +92,7 @@ class NilaiAlternatifController extends Controller
     {
         //
         $nilai = NilaiAlternatif::where('alternatif_id', $id)->get();
-        // return $nilai;
-        // return $nilai;
         $kriterias = Kriteria::all();
-        // return $obat;
         return view ('nilai-alternatif.edit', compact('id','nilai','kriterias'));
     }
 
@@ -101,7 +107,6 @@ class NilaiAlternatifController extends Controller
     {
         //
 
-        return $request;
 
         $nilai = DB::table('nilai')
                     ->where('id', $id)
@@ -130,6 +135,5 @@ class NilaiAlternatifController extends Controller
             $value->delete();
         }
         return redirect()->route('nilai-alternatif.index');
-
     }
 }

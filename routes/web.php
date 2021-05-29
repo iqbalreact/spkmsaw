@@ -27,14 +27,15 @@ Route::prefix('admin')->group(function () {
     Route::resource('/pengguna', UserController::class);
     Route::post('/pengguna/update', 'UserController@updatePengguna')->name('update-pengguna');
     Route::get('/pengguna/delete/{id}', 'UserController@deletePengguna')->name('delete-pengguna');
-
+    
     Route::get('/rekomendasi', 'PerhitunganController@index')->name('index-rekomendasi');
-    Route::get('/rekomendasi/hasil', 'PerhitunganController@perhitungan')->name('perhitungan');
-
+    Route::get('/rekomendasi/hasil/', 'PerhitunganController@perhitungan')->name('perhitungan');
+    
     
 });
 // });
 
+Route::post('/registrasi', 'UserController@register')->name('register-pengguna');
 Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');

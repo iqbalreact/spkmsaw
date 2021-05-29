@@ -18,7 +18,7 @@
   
 <div style="text-align: center">
 
-  <img src="{{asset('assets/img/logo-pemkot.png')}}" alt="" style="height: 100px">
+  <img src="{{asset('assets/img/logo.png')}}" alt="" style="height: 100px">
   <br>
 
   <h3>Sistem Rekomendasi Pemilihan Smartphone</h3>
@@ -29,6 +29,11 @@
   
 <div class="login-box">
   <!-- /.login-logo -->
+  @if (session('msg'))
+    <div class="alert alert-success">
+        {{ session('msg') }}
+    </div>
+  @endif
   <div class="card">
     <div class="card-body login-card-body">
       <p class="login-box-msg">Selamat datang, Silahkan login</p>
@@ -78,7 +83,11 @@
             <button type="submit" class="btn btn-primary btn-block">Sign In</button>
           </div>
           <!-- /.col -->
-        </div>
+        </div><br>
+        <p class="mb-1">
+          Belum Punya Akun ?
+          <a href="{{route('register')}}">Registrasi Disini</a>
+        </p>
       </form>
     </div>
     <!-- /.login-card-body -->
