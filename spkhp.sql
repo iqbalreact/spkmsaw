@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 5.1.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 28 Bulan Mei 2021 pada 14.30
--- Versi server: 10.4.14-MariaDB
--- Versi PHP: 7.2.33
+-- Waktu pembuatan: 29 Bulan Mei 2021 pada 09.56
+-- Versi server: 10.4.19-MariaDB
+-- Versi PHP: 7.3.28
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `smartphonespk`
+-- Database: `spkhp`
 --
 
 -- --------------------------------------------------------
@@ -31,39 +31,42 @@ CREATE TABLE `alternatif` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `nama_alternatif` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `harga` int(50) NOT NULL,
-  `deskripsi` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL
+  `user_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data untuk tabel `alternatif`
 --
 
-INSERT INTO `alternatif` (`id`, `nama_alternatif`, `harga`, `deskripsi`) VALUES
-(10, 'Xiaomi Note 10 Pro', 3498000, 'Belum pernah ada sebelumnya, Mi Note 10 dilengkapi kamera 108 MP, dengan resolusi foto tunggal hingga 12032 x 9024, 12 kali lebih tinggi daripada resolusi 4K! Dengan sensor gambar super besar pada ukuran 1/1,33\", kamera pada Mi Note 10 Pro melampaui sebagian besar kamera digital'),
-(11, 'Xiaomi Poco F2 Pro', 6349000, 'Belum pernah ada sebelumnya, Mi Note 10 dilengkapi kamera 108 MP, dengan resolusi foto tunggal hingga 12032 x 9024, 12 kali lebih tinggi daripada resolusi 4K! Dengan sensor gambar super besar pada ukuran 1/1,33\", kamera pada Mi Note 10 Pro melampaui sebagian besar kamera digital'),
-(12, 'Xiaomi Pocophone M3', 1899000, NULL),
-(13, 'Xiaomi Pocophone X3 NFC', 2850000, NULL),
-(14, 'Xiaomi Pocophone X3 Pro', 3625000, NULL),
-(15, 'Oppo A12', 1725000, NULL),
-(16, 'Oppo A74', 3799000, NULL),
-(17, 'Oppo Reno 5', 4500000, NULL),
-(18, 'Oppo A15', 1775000, NULL),
-(19, 'Oppo Reno 5F', 3890000, NULL),
-(20, 'Samsung Galaxy A12', 2190000, NULL),
-(21, 'Samsung Galaxy M02', 1220000, NULL),
-(22, 'Samsung Galaxy A11', 1650000, NULL),
-(23, 'Samsung Galaxy A72', 5999000, NULL),
-(24, 'Samsung Galaxy A52', 489000, NULL),
-(25, 'Realme C11', 1449000, NULL),
-(26, 'Realme 8 Pro', 4449000, NULL),
-(27, 'Realme C12', 1449000, NULL),
-(28, 'Realme 8', 3599000, NULL),
-(29, 'Realme 6 Pro', 3799000, NULL),
-(30, 'Vivo Y20', 2099000, NULL),
-(31, 'Vivo Y51A', 3399000, NULL),
-(32, 'Vivo Y20S', 2999000, NULL),
-(33, 'Vivo V20', 4399000, NULL),
-(34, 'Vivo Y30i', 2399000, NULL);
+INSERT INTO `alternatif` (`id`, `nama_alternatif`, `harga`, `user_id`) VALUES
+(10, 'Xiaomi Note 10 Pro', 3498000, 10),
+(11, 'Xiaomi Poco F2 Pro', 6349000, 10),
+(12, 'Xiaomi Pocophone M3', 1899000, 10),
+(13, 'Xiaomi Pocophone X3 NFC', 2850000, 10),
+(14, 'Xiaomi Pocophone X3 Pro', 3625000, 10),
+(15, 'Oppo A12', 1725000, 10),
+(16, 'Oppo A74', 3799000, 10),
+(17, 'Oppo Reno 5', 4500000, 10),
+(18, 'Oppo A15', 1775000, 10),
+(19, 'Oppo Reno 5F', 3890000, 10),
+(20, 'Samsung Galaxy A12', 2190000, 10),
+(21, 'Samsung Galaxy M02', 1220000, 10),
+(22, 'Samsung Galaxy A11', 1650000, 10),
+(23, 'Samsung Galaxy A72', 5999000, 10),
+(24, 'Samsung Galaxy A52', 489000, 10),
+(25, 'Realme C11', 1449000, 10),
+(26, 'Realme 8 Pro', 4449000, 10),
+(27, 'Realme C12', 1449000, 10),
+(28, 'Realme 8', 3599000, 10),
+(29, 'Realme 6 Pro', 3799000, 10),
+(30, 'Vivo Y20', 2099000, 10),
+(31, 'Vivo Y51A', 3399000, 10),
+(32, 'Vivo Y20S', 2999000, 10),
+(33, 'Vivo V20', 4399000, 10),
+(34, 'Vivo Y30i', 2399000, 10),
+(35, 'HP MI', 2500000, 18),
+(37, 'RealMe 9', 2500000, 19),
+(38, 'HP Phone', 3000000, 19);
 
 -- --------------------------------------------------------
 
@@ -177,7 +180,9 @@ INSERT INTO `model_has_roles` (`role_id`, `model_type`, `model_id`) VALUES
 (2, 'App\\User', 14),
 (2, 'App\\User', 15),
 (2, 'App\\User', 16),
-(2, 'App\\User', 17);
+(2, 'App\\User', 17),
+(2, 'App\\User', 18),
+(2, 'App\\User', 19);
 
 -- --------------------------------------------------------
 
@@ -188,38 +193,31 @@ INSERT INTO `model_has_roles` (`role_id`, `model_type`, `model_id`) VALUES
 CREATE TABLE `nilai_alternatif` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `alternatif_id` int(11) NOT NULL,
-  `subkriteria_id` int(11) NOT NULL
+  `subkriteria_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data untuk tabel `nilai_alternatif`
 --
 
-INSERT INTO `nilai_alternatif` (`id`, `alternatif_id`, `subkriteria_id`) VALUES
-(193, 10, 4),
-(194, 10, 7),
-(195, 10, 11),
-(196, 10, 17),
-(197, 10, 22),
-(198, 10, 26),
-(199, 10, 32),
-(200, 10, 37),
-(201, 14, 5),
-(202, 14, 7),
-(203, 14, 11),
-(204, 14, 16),
-(205, 14, 21),
-(206, 14, 26),
-(207, 14, 32),
-(208, 14, 36),
-(209, 28, 5),
-(210, 28, 6),
-(211, 28, 12),
-(212, 28, 17),
-(213, 28, 21),
-(214, 28, 26),
-(215, 28, 32),
-(216, 28, 36);
+INSERT INTO `nilai_alternatif` (`id`, `alternatif_id`, `subkriteria_id`, `user_id`) VALUES
+(9, 12, 3, 19),
+(10, 12, 7, 19),
+(11, 12, 12, 19),
+(12, 12, 17, 19),
+(13, 12, 23, 19),
+(14, 12, 27, 19),
+(15, 12, 31, 19),
+(16, 12, 37, 19),
+(17, 38, 4, 19),
+(18, 38, 7, 19),
+(19, 38, 11, 19),
+(20, 38, 16, 19),
+(21, 38, 24, 19),
+(22, 38, 28, 19),
+(23, 38, 32, 19),
+(24, 38, 38, 19);
 
 -- --------------------------------------------------------
 
@@ -299,10 +297,10 @@ CREATE TABLE `subkriteria` (
 
 INSERT INTO `subkriteria` (`id`, `kriteria_id`, `nama_subkriteria`, `bobot_subkriteria`) VALUES
 (1, 1, 'Rp 1.500.000 - Rp 1.999.000', 5),
-(2, 1, '2000000 - 2499000', 4),
-(3, 1, '2500000 - 2999000', 3),
-(4, 1, '3000000 - 3499000', 2),
-(5, 1, '3500000 - 4000000', 1),
+(2, 1, 'Rp 2.000.000 - Rp 2.499.000', 4),
+(3, 1, 'Rp 2.500.000 - Rp 2.999.000', 3),
+(4, 1, 'Rp 3.000.000 - Rp 3.499.000', 2),
+(5, 1, 'Rp 3.500.000 - Rp 4.000.000', 1),
 (6, 2, '8 GB', 5),
 (7, 2, '6 GB', 4),
 (8, 2, '4 GB', 3),
@@ -363,7 +361,9 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `name`, `username`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
 (10, 'Admin', '999', 'hello@admin.com', NULL, '$2y$10$bZZ5JHPuCV5QTxxkKBjPweThVX/BzM6BuPUyBdXFV8E.9u4.f9P9.', NULL, '2021-04-02 19:21:16', '2021-04-02 20:45:42'),
-(17, 'guest', 'guest', 'guest@admin.com', NULL, '$2y$10$bOTrD/oE8sH7MHtX2y8.s.89QBsyjVQebi76OSl62AcelMtwuN8wC', NULL, '2021-05-19 03:52:39', '2021-05-19 03:52:39');
+(17, 'guest', 'guest', 'guest@admin.com', NULL, '$2y$10$bOTrD/oE8sH7MHtX2y8.s.89QBsyjVQebi76OSl62AcelMtwuN8wC', NULL, '2021-05-19 03:52:39', '2021-05-19 03:52:39'),
+(18, 'hapid', 'hapid123', 'hapid@gmail.com', NULL, '$2y$10$hVu5BUJp6chUTiEDnbR4b.UpyD/FWX5fkGLfWIHc09XJFcYMmbwNG', NULL, '2021-05-28 20:38:03', '2021-05-28 20:38:03'),
+(19, 'Wildan', 'wildan123', 'wildan@gmail.com', NULL, '$2y$10$NCcXglSyKPlpMySZUQf5tenA.Dfd2D60yEEZ6y5cLZfKcQVEqH9C.', NULL, '2021-05-28 21:00:35', '2021-05-28 21:00:35');
 
 --
 -- Indexes for dumped tables
@@ -461,7 +461,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT untuk tabel `alternatif`
 --
 ALTER TABLE `alternatif`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT untuk tabel `failed_jobs`
@@ -485,7 +485,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT untuk tabel `nilai_alternatif`
 --
 ALTER TABLE `nilai_alternatif`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=217;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT untuk tabel `permissions`
@@ -509,7 +509,7 @@ ALTER TABLE `subkriteria`
 -- AUTO_INCREMENT untuk tabel `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
