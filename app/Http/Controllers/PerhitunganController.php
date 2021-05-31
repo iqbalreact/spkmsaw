@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\User;
 use App\Kriteria;
 use App\SubKriteria;
 use App\Alternatif;
 use App\NilaiAlternatif;
 use DB;
+use Auth;
+
 
 class PerhitunganController extends Controller
 {
@@ -22,7 +24,12 @@ class PerhitunganController extends Controller
 
         
         //Memanggil data nllai alternatif
+        $role = Auth::user()->getRoleNames()->first();
+
+        $user_id = Auth::user()->id;
+
         $data = DB::table('nilai_alternatif')
+                ->where('user_id', $user_id)
                 ->join('subkriteria', 'nilai_alternatif.subkriteria_id', '=', 'subkriteria.id')
                 ->leftjoin('kriteria', 'kriteria.id', '=', 'subkriteria.kriteria_id')
                 ->select('bobot_subkriteria', 'nama_kriteria')
@@ -45,11 +52,15 @@ class PerhitunganController extends Controller
         $normalisasi = collect(); //membuat collection untuk menyimpan data ternormalisasi
 
         //memanggil data nilai alternatif untuk proses normalisasi
+        $role = Auth::user()->getRoleNames()->first();
+
         $nilai_alternatif = DB::table('nilai_alternatif')
+                ->where('user_id', $user_id)
                 ->join('subkriteria', 'nilai_alternatif.subkriteria_id', '=', 'subkriteria.id')
                 ->leftjoin('kriteria', 'kriteria.id', '=', 'subkriteria.kriteria_id')
                 ->get()
                 ->groupBy('alternatif_id');
+        
 
         foreach ($nilai_alternatif as $key => $value) {
             foreach ($value as $item) {
